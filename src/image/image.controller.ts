@@ -50,7 +50,7 @@ export class ImageController {
             return await this.imageService.create(
                 parseInt(queryParams.user[0], 10), 
                 response.filename,
-                queryParams.title[0],
+                queryParams.title.toString(),
                 transactionManager);
         });
         return response;
