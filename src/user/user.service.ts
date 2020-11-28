@@ -25,13 +25,11 @@ export class UserService {
         let {
             email,
             name,
-            photoUrl
         } = userDto
         return await userRepository.insert(
             new User({
                 email,
                 name,
-                photoUrl,
                 createdAt: new Date(),
                 updatedAt: new Date()
             })
@@ -43,14 +41,12 @@ export class UserService {
         let {
             email,
             name,
-            photoUrl
         } = userDto
         return await userRepository.update(
             id,
             {
                 name,
                 email,
-                photoUrl,
                 updatedAt: new Date()
             }
         )
