@@ -45,12 +45,12 @@ export class ImageController {
         const response = {
             originalname: file.originalname,
             filename: file.filename,
-        };
+          };
         await this.entityManager.transaction(async transactionManager => {
             return await this.imageService.create(
                 parseInt(queryParams.user[0], 10), 
                 response.filename,
-                queryParams.title.toString(),
+                queryParams.title[0],
                 transactionManager);
         });
         return response;
