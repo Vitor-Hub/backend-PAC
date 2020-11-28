@@ -20,6 +20,15 @@ export class UserService {
         })
     }
 
+    async getByEmail(email: string) {
+        return await this.userRepository.findOne({
+            where: {
+                email,
+                deletedAt: IsNull()
+            }
+        })
+    }
+
     async create(userDto: UserDto, entityManager: EntityManager) {
         let userRepository = entityManager.getRepository(User)
         let {

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { EntityManager } from "typeorm";
 import { UserDto } from "./dto/user.dto";
@@ -19,8 +19,19 @@ export class UserController {
         return await this.userService.getById(id)
     }
 
+    @Get('/email/:email')
+    async getOneByEmail(
+        @Param('email') email: string,
+    ): Promise<User> {
+        return await this.userService.getByEmail(email)
+    }
+
     @Post()
     async createUser(@Body() userDto: UserDto) {
+        let userExists = await this.getOneByEmail(userDto.email)
+        if(userExists) {
+            throw new BadRequestException('Já existe um usuário cadastrado com este e-mail')
+        }
         return await this.entityManager.transaction(async transactionManager => {
             return await this.userService.create(userDto, transactionManager);
         });
