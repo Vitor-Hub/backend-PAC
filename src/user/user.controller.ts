@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
 import { EntityManager } from "typeorm";
 import { UserDto } from "./dto/user.dto";
 import { User } from "./user.entity";
