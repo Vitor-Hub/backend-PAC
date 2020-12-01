@@ -1,1 +1,1 @@
-web: yarn start:dev
+web: node main.ts
